@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body class="bg-secondary">
+    <header class="hero bg-dark text-light">
+        <div id="time-header"></div>
+    </header>
+
+
+  <div class="d-flex justify-content-start bg-secondary text-light">
+    <!-- card -->
+      <card class="card bg-dark text-light m-5 " style="width: 30rem">
+        <div class="container card-body">
+          <div class="text-center">
+            <h2 class="card-title">Project Tracker</h2>
+            <p class="card-subtitle lead">Keep Track of your Projects</p>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-4 col-md-6 col-lg-8 text-center">
+              <p class="card-text text-muted my-4">
+                Click the button below to add a new project to the list on the right.
+              </p>
+              <button class="btn btn-primary btn-warning" data-bs-toggle="modal"
+              data-bs-target="#reg-modal">
+                New Project
+              </button>
+            </div>
+          </div>
+        </div>
+      </card>
+
+  <!-- modal -->
+      <div class="modal fade text-dark" id="reg-modal" tabindex="-1" aria-labelledby="modal-title"
+      aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modal-title">get the latest updates</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"
+              aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>lorem ipsum lorem ipsum lorem ipspum oaijnf amet consectetur adispiciing elit.</p>
+              <div>
+                <label for="modal-type" class="form-label">Project Type: </label>
+                <select name="project" id="project-type" >
+                  <option value="">Select</option>
+                  <option value="1">CSS</option>
+                  <option value="2">HTML</option>
+                  <option value="3">JS</option>
+                  <option value="4">ALL</option>
+                </select>
+              </div>
+              <div>
+                <label for="modal-type" class="form-label">Project Name</label>
+                <input type="text" class="form-control" id="project-name">
+              </div>
+              <div>
+                <label for="modal-type" class="form-label">Project Due Date</label>
+                <input type="text" class="form-control" id="project-date">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  <!-- table -->
+  <!-- The name of the project.
+
+  The type of project (use a <select> drop-down).
+
+  The date the project is due (use the date input type).
+
+  Optional: Use the jQuery UI datepicker instead of date input type -->
+    <table class="table m-5 w-50 h-50 bg-dark text-light" id="table">
+      <thead>
+        <tr>
+          <th scope="col h-10">Project Name</th>
+          <th scope="col">Project Type</th>
+          <th scope="col">Due Date</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  </div>
+
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>

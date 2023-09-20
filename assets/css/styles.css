@@ -1,0 +1,18 @@
+#time-header{
+    display: flex;
+    height: 60px; 
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 28px;
+    padding-right: 50px;
+}
+.btn {
+    border: solid black;
+    background-color: darkgoldenrod;
+}
+.btn:hover, .btn:active {
+    border: solid black;
+    background-color: goldenrod;
+    color: black;
+}
