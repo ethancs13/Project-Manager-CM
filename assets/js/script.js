@@ -17,19 +17,20 @@ function time(){
 
 function setup_table() {
     
-    console.log("setup table")
-    var row = 
-    $('<tr><td scope="row">' +
-    projectList[i].name +
-    '</td><td>' + projectList[i].type +
-    '</td><td>' + projectList[i].date +
-    '</td><td></td></tr>')
-    
-    var th = $('<th><button class="del-btn">delete</button></h>')
+    console.log("setup table" + i)
+    console.log($(projectList).last()[0].name)
 
-    row.append(th)
-    table_body.append(row)
-    $('#reg-modal').modal('hide')
+    var row = $('<tr><td id="' + i + '" scope="row">' +
+        $(projectList).last()[0].name +
+        '</td><td>' + $(projectList).last()[0].type +
+        '</td><td>' + $(projectList).last()[0].date +
+        '</td></tr>')
+        var th = $('<th><button class="del-btn">delete</button></th>')
+        
+        row.append(th)
+        table_body.append(row)
+
+        th.on('click', removeEl)
 }
 
 $('#reg-modal').on('click', '.btn-primary', () => {
@@ -40,69 +41,97 @@ $('#reg-modal').on('click', '.btn-primary', () => {
         switch (project_type.val()){
             case '1':
                 type = 'CSS'
-                setup_table()
                 break;
             case '2':
                 type = 'HTML'
-                setup_table()
                 break;
             case '3':
                 type = 'JS'
-                setup_table()
                 break;
             case '4':
                 type = 'ALL'
-                setup_table()
                 break;
             default:
                 alert("Please select a project type")
                 break;
         }
+
+        var project = {
+            name: project_name.val(),
+            type: type,
+            date: due_date.val(),
+            number: i
+        }
+        projectList.push(project)
+        i += 10
+        setup_table()
+
     } else {
         alert("please check your " + 
         "answers and try again") // not entered correctly
         return;
     }
-    var project = {
-        name: project_name.val(),
-        type: type,
-        date: due_date.val()
-    }
-    projectList.push(project)
+    
+    
     localStorage.setItem('projects', JSON.stringify($(projectList)))
 })
-
+var i;
 $( function retrieveProjects(){
-
+    i = 0;
+    var id = 0;
     if(localStorage.getItem('projects')){ // if it exists
         var array = JSON.parse(localStorage.getItem('projects'))
-        console.log(array)
-        
 
         for (f=0;f<array.length;f++){ // populate projectList[]
+            // console.log(array[f].number)
             projectList.push(array[f])
+            projectList[f].number = i;
+            
+
+            console.log(i)
+        
+            var row = $('<tr id="' + i + '"><td sfope="row">' +
+            projectList[f].name +
+            '</td><td>' + projectList[f].type +
+            '</td><td>' + projectList[f].date +
+            '</td></tr>')
+            var th = $('<th><button class="del-btn">delete</button></th>')
+            
+            row.append(th)
+            table_body.append(row)
+
+            th.on('click', removeEl)
+
+            i += 10
         }
 
     } else { // if doesnt exist
-
-    }
-
-    for (i=0;i<projectList.length;i++){
-        
-        var row = $('<tr><td scope="row">' +
-        projectList[i].name +
-        '</td><td>' + projectList[i].type +
-        '</td><td>' + projectList[i].date +
-        '</td><td></td></tr>')
-        var th = $('<th><button class="del-btn">delete</button></h>')
-
-        row.append(th)
-        table_body.append(row)
     }
 })
+var list = []
+function removeEl(e){
 
-var del_btn = $('.del-btn')
-del_btn.on('click', () => {
-    this.parent().remove()
-    console.log("hello")
-})
+    var array = JSON.parse(localStorage.getItem('projects')) // remove from localStorage
+    
+    // projectList = $(array).splice(($(this).parent().children()[0].id)-1, 1)
+    localStorage.setItem('projects', JSON.stringify($(projectList)))
+
+    if (projectList.length < 2) {
+        list = []
+        localStorage.clear()
+        projectList = list
+    } else {
+        // remove item at that index
+        // projectList.splice(($(this).nextChild().id)/10, 1)
+        // update local storage
+        // localStorage.setItem("projects", JSON.stringify(projectList))
+    }
+
+
+
+    var target = $(e.target).parent().parent() // remove from UI
+    target.remove()
+    
+    
+    i = i-10
+}
