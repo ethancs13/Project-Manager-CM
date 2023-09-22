@@ -1,7 +1,7 @@
 var time_header = $('#time-header')
 var project_type = $('#project-type')
 var project_name = $('#project-name')
-var table_body = $('#table-body')
+var table_body = document.getElementById('table-body')
 var table = $('#table')
 var due_date = $('#project-date').datepicker()
 
@@ -20,11 +20,11 @@ function retrieveProjects(){
     if(localStorage.getItem('projects')){ // if it exists
         var array = JSON.parse(localStorage.getItem('projects'))
 
-        for (f=0;f<array.length;f++){ // populate projectList[]
-            console.log(projectList)
+        for (var f=0; f<array.length; f++){ // populate projectList[]
+
             projectList.push(array[f])
         
-            var row = $('<tr><td sfope="row">' +
+            var row = $('<tr><td scope="row">' +
             projectList[f].name +
             '</td><td>' + projectList[f].type +
             '</td><td>' + projectList[f].date +
@@ -32,13 +32,14 @@ function retrieveProjects(){
             var th = $('<th></th>')
             
             var button = $('<button>delete</button>')
+            button.attr('data-index',f)
             button.on('click', removeEl)
         
             th.append(button)
             row.append(th)
             table_body.append(row)
             table_body.sortable()
-        } } else {} // if doesnt exist do nothing
+        }}
 }
 
 function setup_table() { // setup last added element in projectList
@@ -87,7 +88,7 @@ $('#reg-modal').on('click', '.btn-primary', () => {
         }
         projectList.push(project)
         setup_table()
-        localStorage.setItem('projects', JSON.stringify($(projectList)))
+        localStorage.setItem('projects', JSON.stringify(projectList))
 
     } else {
         alert("please check your " + 
@@ -100,19 +101,18 @@ $('#reg-modal').on('click', '.btn-primary', () => {
 })
 
 
-
 function removeEl(e){
 
-    var array = JSON.parse(localStorage.getItem('projects')) // remove from localStorage
-    projectList = array;
+    var array = JSON.parse(localStorage.getItem('projects')) // get from localStorage
+    var index = e.target.dataset.index
+    projectList.splice(index, 1)
 
-    // $(projectList).splice(0,1)
-
-    localStorage.setItem('projects', JSON.stringify($(projectList)))
-
-    retrieveProjects() 
+    localStorage.setItem('projects', JSON.stringify(projectList))
 
     var target = $(e.target).parent().parent() // remove from UI
-    target.remove()
+
+    table_body[0].innerHTML = ''
+
+    retrieveProjects() 
     
 }

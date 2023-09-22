@@ -3,16 +3,37 @@
     height: 60px; 
     width: 100%;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     font-size: 28px;
-    padding-right: 50px;
 }
 .btn {
     border: solid black;
-    background-color: darkgoldenrod;
-}
-.btn:hover, .btn:active {
-    border: solid black;
-    background-color: goldenrod;
+    background-color: rgb(184, 88, 243);
     color: black;
+    font-size: 20px;
+}
+.btn:hover {
+    border: solid black;
+    background-color: rgb(162, 99, 211);
+    color: black;
+}
+.btn:active {
+    background-color: rgb(23, 117, 6);
+}
+.btn:focus {
+    background-color: rgb(119, 2, 178);
+}
+body {
+    background-color: rgba(111, 79, 238, 0.644);
+}
+.card {
+    box-shadow: 5px 5px 10px black;
+}
+footer {
+    height: 50px;
+    width: 100%;
+    background-color: var(--bs-dark);
+    position: absolute;
+    bottom: 0;
+
 }
