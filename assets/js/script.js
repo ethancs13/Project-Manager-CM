@@ -55,7 +55,6 @@ function setup_table() { // setup last added element in projectList
         th.append(button)
         row.append(th)
         table_body.append(row)
-        table_body.sortable()
 }
 
 $('#reg-modal').on('click', '.btn-primary', () => {
